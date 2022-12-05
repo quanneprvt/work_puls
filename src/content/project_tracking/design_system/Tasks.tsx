@@ -44,6 +44,16 @@ const Tasks = () => {
     });
   }, []);
 
+  const updateTask = useCallback((data: Task) => {
+    console.warn(data);
+    setTasks((cur) => {
+      const taskIndex = cur.findIndex((task) => task.id === data.id);
+      const result = [...cur];
+      result[taskIndex] = { ...result[taskIndex], ...data };
+      return result;
+    });
+  }, []);
+
   return (
     <Card>
       <CardHeader
@@ -90,6 +100,7 @@ const Tasks = () => {
                   status={TaskStatus[status]}
                   addTask={addNewTask}
                   updateTaskStatus={updateTaskStatus}
+                  onTaskEdit={updateTask}
                   isDragging={isDragging}
                   onDragStart={() => setIsDragging(true)}
                   onDragEnd={() => setIsDragging(false)}

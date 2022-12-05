@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef } from 'react';
+import React, { useCallback, useContext, useMemo, useRef } from 'react';
 import {
   Avatar,
   Box,
@@ -15,12 +15,14 @@ import { numberToTimeObject } from 'src/utils/time';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 import { Priority, Task } from 'src/models/task';
+import { PopupContext } from 'src/contexts/PopupContext';
 
 const colors = ['#6dcfba', '#5895d7', '#f5c344'];
 
 interface DetailCardProps extends Task {
   onDragStart?: () => void;
   onDragEnd?: () => void;
+  onTaskEdit?: (task: Task) => void;
 }
 
 const DetailCard: React.FC<DetailCardProps> = ({
@@ -29,10 +31,14 @@ const DetailCard: React.FC<DetailCardProps> = ({
   assignees,
   timer,
   priority,
+  status,
   onDragStart,
-  onDragEnd
+  onDragEnd,
+  onTaskEdit
 }) => {
   const theme = useTheme();
+  const { openPopup } = useContext(PopupContext);
+
   const timeObject = useMemo(() => {
     return numberToTimeObject(timer);
   }, [timer]);
@@ -53,6 +59,20 @@ const DetailCard: React.FC<DetailCardProps> = ({
     onDragEnd && onDragEnd();
   }, [onDragEnd]);
 
+  const openEditPopup = useCallback(() => {
+    openPopup(
+      'editTask',
+      {
+        id,
+        name,
+        assignees,
+        priority,
+        status
+      },
+      onTaskEdit
+    );
+  }, [assignees, id, name, onTaskEdit, openPopup, priority, status]);
+
   return (
     <Card
       sx={{
@@ -63,6 +83,7 @@ const DetailCard: React.FC<DetailCardProps> = ({
       draggable
       onDragStart={onStartDrag}
       onDragEnd={onEndDrag}
+      onDoubleClick={openEditPopup}
     >
       <CardHeader
         action={

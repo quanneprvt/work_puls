@@ -26,6 +26,7 @@ interface StatusCardContainerProps {
   isDragging?: boolean;
   addTask?: (data: Task) => void;
   updateTaskStatus?: (id: string, status: TaskStatus) => void;
+  onTaskEdit?: (data: Task) => void;
 }
 
 const PriorityOrder = [Priority.HIGH, Priority.MEDIUM, Priority.LOW];
@@ -37,7 +38,8 @@ const StatusCardContainer: React.FC<StatusCardContainerProps> = ({
   onDragStart,
   onDragEnd,
   addTask,
-  updateTaskStatus
+  updateTaskStatus,
+  onTaskEdit
 }) => {
   const theme = useTheme();
   const cardRef = useRef<HTMLDivElement>(null);
@@ -153,6 +155,7 @@ const StatusCardContainer: React.FC<StatusCardContainerProps> = ({
               status={item.status as TaskStatus}
               onDragStart={onStartDrag}
               onDragEnd={onEndDrag}
+              onTaskEdit={onTaskEdit}
             ></DetailCard>
           );
         })}

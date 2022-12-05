@@ -5,7 +5,11 @@
 - run `npm run start`
 
 ## Feature:
-- Edit Task
-- Create Task
-- Drag and drop task
-- Responsive
+- Edit Task (Double click at the task)
+- Create Task:
+  + Click on Add new task beside `Tasks` header to freely add task with status
+  + Click on Add new task below status column to add new task with only that status
+- Drag and drop task:
+  + Task have higher priority will be show first
+- Responsive:
+  + Material UI grid layout

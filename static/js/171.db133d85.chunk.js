@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkworkpuls=self.webpackChunkworkpuls||[]).push([[171],{5171:function(e,s,t){t.r(s);var n=t(6907),r=t(890),a=t(184);s.default=function(){return(0,a.jsxs)(a.Fragment,{children:[(0,a.jsx)(n.ql,{children:(0,a.jsx)("title",{children:"Dashboard"})}),(0,a.jsx)(r.Z,{children:"Readme"}),(0,a.jsx)(r.Z,{children:"Please don't use other page as it is just to make the right design, it has no use"}),(0,a.jsx)(r.Z,{children:"Please navigate to Project Tracking page for task completement"})]})}}}]);
+//# sourceMappingURL=171.db133d85.chunk.js.map
